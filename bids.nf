@@ -120,8 +120,11 @@ process run_bids{
     #Set up logging output
     sub_json=!{sub_input}
     sub=${sub_json%.json}
-    log_out=${logging_dir}/${sub}.out
-    log_err=${logging_dir}/${sub}.err
+    datestr=!{
+        workflow.start.toString().split("T")[0]
+    }
+    log_out=${logging_dir}/${sub}_${datestr}.out
+    log_err=${logging_dir}/${sub}_${datestr}.err
 
 
     echo "TASK ATTEMPT !{task.attempt}" >> ${log_out}
